@@ -1,0 +1,40 @@
+<div style="margin-top: 50px;">
+
+    <h1 style="text-align: center;">Insurance's Dashboard</h1>
+    <mat-divider></mat-divider>
+    <br>
+    <br>
+    <br>
+    <mat-card fxLayout="column" fxLayoutAlign="center" style="border: 1px solid black;width: 40%;margin: auto;">
+        ACCOUNT TYPE: {{account_type}}<br>
+        READ ACCESS: {{read_access}}<br>
+        WRITE ACCESS: {{write_access}}<br>
+    </mat-card>
+
+    <br>
+    <br>
+
+    <mat-card fxLayout="column" fxLayoutAlign="center" style="border: 1px solid black;width: 40%;margin: auto;">
+
+        <div fxLayout="row">
+          <span fxFlexAlign="start" style="border: 1px solid black;padding: 5px;cursor: pointer;" (click)="goPrev()"><</span> <span fxFlexAlign="center" fxFlex="100%" style="text-align: center">PID1</span> <span fxFlexAlign="end" style="border: 1px solid black;padding: 5px;cursor: pointer;" (click)="goNext()">></span>
+        </div>
+  
+    
+        <h1 style="text-align: center;">Patient Record</h1>
+    
+        <div fxLayout="row" fxLayoutGap="20%" fxLayoutAlign="center">
+    
+          <div fxLayout="column">
+            <span style="font-weight: bolder;" *ngFor="let key of column_names"> {{key | titlecase}}: </span>
+          </div>
+      
+          <div fxLayout="column">
+            <span *ngFor="let value of values"> {{value}} </span>
+          </div>
+    
+        </div>
+    
+      </mat-card>
+
+</div>

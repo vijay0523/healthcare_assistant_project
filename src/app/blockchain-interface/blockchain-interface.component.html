@@ -1,0 +1,98 @@
+<div fxLayout="column" fxFlex="100%" fxLayoutAlign="none center">
+
+    <br>
+    
+    <!-- <mat-card fxLayout="column" fxLayoutAlign="center" style="border: 1px solid black;width: 40%;">
+  
+      <h1 style="text-align: center;">Patient Record</h1>
+  
+      <div fxLayout="row" fxLayoutGap="20%" fxLayoutAlign="center">
+  
+        <div fxLayout="column">
+          <span style="font-weight: bolder;" *ngFor="let key of column_names"> {{key | titlecase}}: </span>
+        </div>
+    
+        <div fxLayout="column">
+          <span *ngFor="let value of values"> {{value}} </span>
+        </div>
+  
+      </div>
+  
+    </mat-card> -->
+  
+    <br>
+    <br>
+  
+  
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10%" style="width: 80%;">
+      <span fxFlex="40%" style="word-wrap: break-word;"> <span style="font-weight: bolder;">Encoded Data:</span><br> {{json_encoded}} </span>
+      <!-- <span fxFlex="20%" style="word-wrap: break-word;"> <span>Encoded Data:</span> {{json_encoded}} </span> -->
+      <span fxFlex="40%" style="word-wrap: break-word;"> <span style="font-weight: bolder;">Encrypted Data:</span> {{encrypted_data}} </span>
+      <!-- <code fxFlex="20%" style="word-wrap: break-word;"> {{encrypted_data}} </code> -->
+    </div>
+    <br>
+    <!-- <mat-divider fxFlex="100%"></mat-divider> -->
+    <br>
+    <br>
+    <div fxLayout="row" fxLayoutGap="10%">
+      <button mat-raised-button (click)="call_blockchain()" fxFlex="60%">Request Medical Records</button>
+      <button mat-raised-button (click)="read_data_blockchain(0)" style="width: 40vw;">Retrieve Data from Blockchain</button>
+    </div>
+    <br>
+    <p *ngIf="loading">Querying Blockchain. Please wait..</p>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10%" style="width: 80%;">
+      <span fxFlex="40%" style="word-wrap: break-word;"> <span style="font-weight: bolder;">Data from Blockchain:</span><br> {{blockchain_data}} </span>
+      <!-- <span fxFlex="20%" style="word-wrap: break-word;"> <span>Encoded Data:</span> {{json_encoded}} </span> -->
+      <span fxFlex="40%" style="word-wrap: break-word;"> <span style="font-weight: bolder;">Decrypted Data:</span> {{blockchain_decrypted}} </span>
+      <!-- <code fxFlex="20%" style="word-wrap: break-word;"> {{encrypted_data}} </code> -->
+    </div>
+
+    <br>
+    <br>
+
+    <mat-card fxLayout="column" fxLayoutAlign="center" style="border: 1px solid black;width: 40%;">
+
+      <div fxLayout="row">
+        <span fxFlexAlign="start" style="border: 1px solid black;padding: 5px;cursor: pointer;" (click)="goPrev()"><</span> <span fxFlexAlign="center" fxFlex="100%" style="text-align: center">PID1</span> <span fxFlexAlign="end" style="border: 1px solid black;padding: 5px;cursor: pointer;" (click)="goNext()">></span>
+      </div>
+
+  
+      <h1 style="text-align: center;">Patient Record</h1>
+  
+      <div fxLayout="row" fxLayoutGap="20%" fxLayoutAlign="center">
+  
+        <div fxLayout="column">
+          <span style="font-weight: bolder;" *ngFor="let key of column_names"> {{key | titlecase}}: </span>
+        </div>
+    
+        <div fxLayout="column">
+          <span *ngFor="let value of values"> {{value}} </span>
+        </div>
+  
+      </div>
+  
+    </mat-card>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a [routerLink]="'/doctor'">doctor</a>
+    <a [routerLink]="'/insurance'">insurance</a>
+  
+  </div>
