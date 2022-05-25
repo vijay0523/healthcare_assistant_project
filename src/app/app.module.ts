@@ -14,6 +14,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDividerModule } from '@angular/material/divider';
 import { DoctorComponent } from './doctor/doctor.component';
 import { InsuranceComponent } from './insurance/insurance.component';
+import { PatientComponent } from './patient/patient.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +27,7 @@ import { InsuranceComponent } from './insurance/insurance.component';
     DoctorComponent,
     InsuranceComponent,
     BlockchainInterfaceComponent,
+    PatientComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +38,10 @@ import { InsuranceComponent } from './insurance/insurance.component';
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatDividerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],

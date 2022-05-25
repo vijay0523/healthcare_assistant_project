@@ -1,0 +1,41 @@
+<div style="height: 100%;width: 100%;">
+    <mat-card style="width: 350px;height: 500px;position: absolute;right: 0;bottom: 0;margin: 20px;">
+        <mat-card-header>
+            <h3>Personal Assistant</h3>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content id="out" style="height: 380px;overflow-y: scroll;scroll-snap-type: y proximity;">
+            <br>
+            <br>
+            <div *ngFor="let msg of chat_messages; let i = index" style="border-radius: 25px;border: 1px solid black; width: fit-content;background-color: rgb(222, 219, 219);margin-top: 5px;" [style]="msg.type === 'bot' ? 'border-top-left-radius: 0px;background-color: rgb(222, 219, 219);' : 'border-bottom-right-radius: 0px;background-color: rgb(138, 192, 216);margin-left: auto'">
+                
+                <div style="margin: 10px;">
+                    {{msg.message}}
+                </div>
+            
+                <div *ngIf="msg.type == 'bot' && msg.intent == 'greeting' && i == chat_messages.length-1" style="width:100%; color: rgba(0, 0, 0, 0.642);background-color: white;border-radius: 25px;margin-top: 10px;border-top-left-radius: 0px;border-top-right-radius: 0px;">
+                    <!-- <span style="margin: 5px;"></span> -->
+                    <hr style="margin-top: -2px;">
+                    <span style="margin: 15px;width: 100%;cursor: pointer;" (click)="sendMsg(0)">Schedule an Appointment</span>
+                    <hr>
+                    <span style="margin: 15px;width: 100%;cursor: pointer;">Check Symptoms</span>
+                    <div style="width: 100%;height: 5px;"></div>
+                    <!-- <hr> -->
+                </div>
+                <div *ngIf="msg.type == 'bot' && msg.intent == 'schedule_appointment' && i == chat_messages.length-1" style="width:100%; color: rgba(0, 0, 0, 0.642);background-color: white;border-radius: 25px;margin-top: 10px;border-top-left-radius: 0px;border-top-right-radius: 0px;">
+                    <hr style="margin-top: -2px;">
+                    <span style="margin: 15px;width: 100%;cursor: pointer;">Enter Time: <input [formControl]="appointment_form_field" type="time"/></span>
+                    <div style="width: 100%;height: 5px;"></div>
+                </div>
+            </div>
+            <!-- <div style="border-radius: 25px;border: 1px solid black;border-bottom-right-radius: 0px;padding: 10px; width: fit-content;background-color: rgb(138, 192, 216);margin-top: 5px;margin-left: auto;">Hi</div> -->
+        </mat-card-content>
+        <div style="position: absolute;bottom: 0;width: 92%;border: 1px solid black;height: 50px;margin-bottom: 10px;">
+            <mat-form-field appearance="standard" style="width: 100%;height: 50px;position: absolute;top: 0; left: 0">
+                <mat-label>Type your question here..</mat-label>
+                <input [formControl]="chat_form_field" matInput placeholder="">
+                <mat-icon matSuffix (click)="appendChat()">send</mat-icon>
+            </mat-form-field>
+        </div>
+    </mat-card>
+</div>

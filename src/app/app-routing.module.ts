@@ -5,11 +5,16 @@ import { BlockchainInterfaceComponent } from './blockchain-interface/blockchain-
 import { DoctorComponent } from './doctor/doctor.component';
 import { HospitalComponent } from './hospital/hospital.component';
 import { InsuranceComponent } from './insurance/insurance.component';
+import { PatientComponent } from './patient/patient.component';
 
 const routes: Routes = [
   { 
     path: 'blockchain-interface',
     component: BlockchainInterfaceComponent
+  },
+  { 
+    path: 'patient',
+    component: PatientComponent
   },
   { 
     path: 'hospital',
