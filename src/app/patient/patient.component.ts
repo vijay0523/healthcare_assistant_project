@@ -36,6 +36,7 @@ export class PatientComponent implements OnInit {
   ];
 
   schedule_appointment_input_bool = false;
+  symptom_check_bool = false;
 
   constructor(private http: HttpClient) {
   }
@@ -58,28 +59,37 @@ export class PatientComponent implements OnInit {
       message: this.chat_form_field.value,
       type: "user"
     });
-    this.sendChat();
+    this.sendChat("normal");
     let out: any = document.getElementById("out");
     // allow 1px inaccuracy by adding 1
     var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
   }
 
   sendMsg(type: number) {
+    let intent = ""
     if(type == 0){
       let message = "Schedule an Appointment with a doctor";
       this.chat_messages.push({
         message: message,
         type: "user"
       });
+      intent = "normal"
+    } else if (type == 1){
+      let message = "I want to check my symptoms";
+      this.chat_messages.push({
+        message: message,
+        type: "user"
+      });
+      intent = "symptom"
     }
-    this.sendChat();
+    this.sendChat(intent);
   }
 
-  sendChat() {
-    this.http.post('http://localhost:5000/chat', {msg: this.chat_messages[this.chat_messages.length-1].message}).subscribe(
+  sendChat(type: string) {
+    this.http.post('http://localhost:5000/chat', {msg: this.chat_messages[this.chat_messages.length-1].message, intent: type}).subscribe(
       (data: any) => {
         console.log(data);
-        this.chat_messages.push({message: data[1], intent: data[0], type: 'bot'});
+        this.chat_messages.push({message: data.reply, intent: data.intent, type: 'bot'});
         console.log(this.chat_messages);
         if(data[0] == 'schedule_appointment'){
           this.schedule_appointment_input_bool = true;
