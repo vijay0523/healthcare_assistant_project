@@ -88,6 +88,44 @@ export class PatientComponent implements OnInit {
         type: "user"
       });
       intent = "symptom"
+    } else if (type == 2){
+      let message = "I want to check Heart Related Diseases";
+      this.chat_messages.push({
+        message: message,
+        type: "user"
+      });
+      this.chat_messages.push({
+        message: "Sure! Let me fetch your details from Medical Record",
+        type: "bot"
+      });
+      // this.chat_messages.push({
+      //   message: "Our classifier suggests that you are suffering from Heart Disease",
+      //   type: "bot"
+      // });
+      this.chat_messages.push({
+        message: "Please check out the results in explainer dashboard for more details",
+        type: "bot"
+      });
+      return;
+    } else if (type == 3){
+      let message = "I want to check Diabetes Related Diseases";
+      this.chat_messages.push({
+        message: message,
+        type: "user"
+      });
+      this.chat_messages.push({
+        message: "Sure! Let me fetch your details from Medical Record",
+        type: "bot"
+      });
+      // this.chat_messages.push({
+      //   message: "Our classifier suggests that you are suffering from Diabetes Disease",
+      //   type: "bot"
+      // });
+      this.chat_messages.push({
+        message: "Please check out the results in explainer dashboard for more details",
+        type: "bot"
+      });
+      return;
     }
     this.sendChat(intent);
   }
