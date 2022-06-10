@@ -4,3 +4,23 @@
 ::ng-deep .mat-form-field-appearance-standard .mat-form-field-flex {
     padding-top: unset !important;
 }
+.title-zoom {
+    transition: transform .2s; /* Animation */
+    border-radius: 5px;
+    min-height: 60px !important;
+    background-color: rgb(11, 47, 155) !important;
+    color: white;
+}
+.tile {
+    transition: transform .2s; /* Animation */
+    cursor: pointer;
+}
+.tile:hover > .title-zoom {
+    opacity: 1;
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    transform: translate(0px,120px);
+}
+
+.tile:hover {
+    transform: scale(1.02);
+}

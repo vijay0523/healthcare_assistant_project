@@ -1,0 +1,109 @@
+<div fxLayout="column" style="height: 80vh;" fxLayoutAlign="center center">
+
+    <h1>Access Control Table:</h1>
+
+    <br>
+    <br>
+    <br>
+
+    <table st>
+        <tr>
+            <th>Account Name</th>
+            <th>Account Address</th>
+            <th>Account Type</th>
+            <th>Read Access</th>
+            <th>Write Access</th>
+            <th>Permission</th>
+            <th>-</th>
+        </tr>
+        <tr *ngFor="let data of access_table;" (click)="enable_panel(data.account_address, data.read_access, data.write_access)">
+            <th>{{data.name}}</th>
+            <th>{{data.account_address}}</th>
+            <th>{{data.account_type}}</th>
+            <th>{{data.read_access}}</th>
+            <th>{{data.write_access}}</th>
+            <th>{{data.permission == "1" ? "Requested for Access" : data.permission == "2" ? "Access Granted" : "Access Denied"}}</th>
+            <th><mat-icon (click)="approve_access()">done</mat-icon><mat-icon (click)="revoke_access()">cancel</mat-icon></th>
+        </tr>
+    </table>
+
+    <br>
+    <br>
+    <br>
+
+    <div *ngIf="show_access_panel" fxLayout="row wrap">
+
+        <div style="border: 1px solid black;width: 170px;height: 100px;" fxLayout="column" fxLayoutAlign="center center" (click)="read_para()">
+            ADMISSIONS 
+            <span>
+                Read: <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[0]==1" (click)="lock_para(1,0)">lock_open</mat-icon>
+                    <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[0]!=1" (click)="unlock_para(1,0)">lock</mat-icon>
+            </span>
+            <span>
+                Write: <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[0]==1" (click)="lock_para(1,1)">lock_open</mat-icon>
+                <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[0]!=1" (click)="unlock_para(1,1)">lock</mat-icon>
+            </span> 
+        </div>
+        <div style="border: 1px solid black;width: 170px;height: 100px;" fxLayout="column" fxLayoutAlign="center center">
+            PATIENT DETAILS
+            <span>
+                Read: <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[1]==2" (click)="lock_para(2,0)">lock_open</mat-icon>
+                    <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[1]!=2" (click)="unlock_para(2,0)">lock</mat-icon>
+            </span>
+            <span>
+                Write: <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[1]==2" (click)="lock_para(2,1)">lock_open</mat-icon>
+                <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[1]!=2" (click)="unlock_para(2,1)">lock</mat-icon>
+            </span>
+        </div>
+        <div style="border: 1px solid black;width: 170px;height: 100px;" fxLayout="column" fxLayoutAlign="center center">
+            CPT EVENTS
+            <span>
+                Read: <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[2]==3" (click)="lock_para(3,0)">lock_open</mat-icon>
+                    <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[2]!=3" (click)="unlock_para(3,0)">lock</mat-icon>
+            </span>
+            <span>
+                Write: <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[2]==3" (click)="lock_para(3,1)">lock_open</mat-icon>
+                <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[2]!=3" (click)="unlock_para(3,1)">lock</mat-icon>
+            </span>
+        </div>
+        <div style="border: 1px solid black;width: 170px;height: 100px;" fxLayout="column" fxLayoutAlign="center center">
+            LAB EVENTS
+            <span>
+                Read: <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[3]==4" (click)="lock_para(4,0)">lock_open</mat-icon>
+                    <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[3]!=4" (click)="unlock_para(4,0)">lock</mat-icon>
+            </span>
+            <span>
+                Write: <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[3]==4" (click)="lock_para(4,1)">lock_open</mat-icon>
+                <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[3]!=4" (click)="unlock_para(4,1)">lock</mat-icon>
+            </span>
+        </div>
+        <div style="border: 1px solid black;width: 170px;height: 100px;" fxLayout="column" fxLayoutAlign="center center">
+            PATIENT ICD EVENTS
+            <span>
+                Read: <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[4]==5" (click)="lock_para(5,0)">lock_open</mat-icon>
+                    <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[4]!=5" (click)="unlock_para(5,0)">lock</mat-icon>
+            </span>
+            <span>
+                Write: <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[4]==5" (click)="lock_para(5,1)">lock_open</mat-icon>
+                <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[4]!=5" (click)="unlock_para(5,1)">lock</mat-icon>
+            </span>
+        </div>
+        <div style="border: 1px solid black;width: 170px;height: 100px;" fxLayout="column" fxLayoutAlign="center center">
+            INSURANCE
+            <span>
+                Read: <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[5]==6" (click)="lock_para(6,0)">lock_open</mat-icon>
+                    <mat-icon style="vertical-align: middle;" *ngIf="read_access_disp[5]!=6" (click)="unlock_para(6,0)">lock</mat-icon>
+            </span>
+            <span>
+                Write: <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[5]==6" (click)="lock_para(6,1)">lock_open</mat-icon>
+                <mat-icon style="vertical-align: middle;" *ngIf="write_access_disp[5]!=6" (click)="unlock_para(6,1)">lock</mat-icon>
+            </span>
+        </div>
+        <!-- <div style="border: 1px solid black;width: 50px;height: 100px;" fxLayoutAlign="center center">7</div>
+        <div style="border: 1px solid black;width: 50px;height: 50px;" fxLayoutAlign="center center">8</div>
+        <div style="border: 1px solid black;width: 50px;height: 50px;" fxLayoutAlign="center center">9</div>
+        <div style="border: 1px solid black;width: 50px;height: 50px;" fxLayoutAlign="center center">10</div> -->
+
+    </div>
+
+</div>

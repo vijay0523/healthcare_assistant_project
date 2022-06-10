@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
@@ -9,6 +10,7 @@ import { FormControl } from '@angular/forms';
 })
 export class PatientComponent implements OnInit {
 
+  toggle_chat = false;
   chat_form_field: FormControl = new FormControl('');
   appointment_form_field: FormControl = new FormControl('');
   chat_messages: {message: string, intent?: string, type: string}[] = [
@@ -38,7 +40,7 @@ export class PatientComponent implements OnInit {
   schedule_appointment_input_bool = false;
   symptom_check_bool = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -49,8 +51,13 @@ export class PatientComponent implements OnInit {
         this.chat_messages.push({message: "Appointment set at time "+data, type: 'bot'});
         this.chat_messages.push({message: "Is there anything else that i can do for you? ", intent: 'greeting', type: 'bot'});
         // this.sendChat();
+        let appointment_data = []
+        appointment_data.push({name: 'Patient', time: data, date: '10/06/2022', status: 'Pending'});
+        localStorage.setItem('appointment', JSON.stringify(appointment_data));
       }
     );
+    let element = document.getElementById('chat_box') as HTMLElement;
+    element.style.height = '50px';
   }
 
   appendChat() {
@@ -96,6 +103,26 @@ export class PatientComponent implements OnInit {
         }
       }
     );
+  }
+
+  toggleChat() {
+    this.toggle_chat = !this.toggle_chat;
+    let element = document.getElementById('chat_box') as HTMLElement;
+    if(this.toggle_chat == false){
+      element.style.height = '50px';
+    }
+    else{
+      element.style.height = '500px';
+    }
+  }
+
+  redirect(loc: string) {
+    if(loc == "access-control")
+      this.router.navigate(['patient/access-control']);
+    else if(loc == "medical-record")
+      this.router.navigate(['patient/medical-record']);
+    else if(loc == "explainer-dashboard")
+    this.router.navigate(['patient/explainer-dashboard']);
   }
 
 }

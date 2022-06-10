@@ -1,1 +1,8 @@
+<mat-toolbar style="background-color: #638ef9;width: 100%;">
+    <span><h1>Health Assistant</h1></span>
+    <span fxFlex></span>
+    <span style="padding: 10px;" *ngIf="isLoggedIn">Welcome, {{user}}</span>
+    <span><button *ngIf="!isLoggedIn" mat-raised-button color="success" routerLink="login"><b>Login/Sign Up</b></button></span>
+    <span><button *ngIf="isLoggedIn" mat-raised-button color="success" (click)="logout()"><b>Logout</b></button></span>
+</mat-toolbar>
 <router-outlet></router-outlet>

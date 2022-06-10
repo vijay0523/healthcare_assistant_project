@@ -1,0 +1,17 @@
+<div fxLayout="column" fxLayoutAlign="none center">
+
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="80px" fxFlex style="background-color: white; width: 100%;padding: 50px">
+        <!-- <div style="border: 1px solid black;height: 80px;width: 200px;border-radius: 5px;" fxLayoutAlign="center center">Diabetes Explainer</div>
+        <div style="border: 1px solid black;height: 80px;width: 200px;border-radius: 5px;" fxLayoutAlign="center center">Cardiovascular Explainer</div> -->
+        <span><button (click)="switchExplainer(0)" mat-raised-button color="success" routerLink="login" style="height: 50px;"><b>Diabetes Disease Explainer</b></button></span>
+        <span><button (click)="switchExplainer(1)" mat-raised-button color="success" routerLink="login" style="height: 50px;"><b>Cardiovascular Disease Explainer</b></button></span>
+    </div>
+    
+    <iframe [fxShow]="show_explainer_1" name="iframe1" id="the-iframe" [src]="PATIENT_EXPLAINER_1 | safe" 
+        frameborder="0" border="0" cellspacing="0"
+        style="border-style: none;width: 100%; height: 91vh;"></iframe>
+
+    <iframe [fxShow]="show_explainer_2" name="iframe1" id="the-iframe" [src]="PATIENT_EXPLAINER_2 | safe" 
+    frameborder="0" border="0" cellspacing="0"
+    style="border-style: none;width: 100%; height: 91vh;"></iframe>
+</div>

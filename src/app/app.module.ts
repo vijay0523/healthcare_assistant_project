@@ -19,6 +19,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { LoginComponent } from './login/login.component';
+import { AccessControlComponent } from './patient/access-control/access-control.component';
+import { PatientRecordComponent } from './doctor/patient-record/patient-record.component';
+import { MedicalRecordComponent } from './patient/medical-record/medical-record.component';
+import { ExplainerDashboardComponent } from './patient/explainer-dashboard/explainer-dashboard.component';
+import { SafePipe } from './safe.pipe';
+import { DoctorDashboardComponent } from './doctor/doctor-dashboard/doctor-dashboard.component';
+import { AppointmentsComponent } from './doctor/appointments/appointments.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +37,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     InsuranceComponent,
     BlockchainInterfaceComponent,
     PatientComponent,
+    LoginComponent,
+    AccessControlComponent,
+    PatientRecordComponent,
+    MedicalRecordComponent,
+    ExplainerDashboardComponent,
+    SafePipe,
+    DoctorDashboardComponent,
+    AppointmentsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +59,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatIconModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
   ],
   providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]

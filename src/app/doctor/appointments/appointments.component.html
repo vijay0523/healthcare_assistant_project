@@ -1,0 +1,25 @@
+<div fxlayout="column" fxLayoutAlign="center center">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <table st>
+        <tr>
+            <th>Account Name</th>
+            <th>Appointment Time</th>
+            <th>Appointment Date</th>
+            <th>Appointment Status</th>
+        </tr>
+        <tr *ngFor="let data of appointment_table;">
+            <th>{{data.name}}</th>
+            <th>{{data.time}}</th>
+            <th>{{data.date}}</th>
+            <th>{{data.status}}</th>
+        </tr>
+    </table>
+</div>

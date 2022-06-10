@@ -10,218 +10,7 @@ import { Buffer } from 'buffer';
 
 // import * as keypair from 'keypair';
 import Web3 from 'web3';
-
-const abi = [
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "access_type",
-				"type": "uint256"
-			}
-		],
-		"name": "init_priviledges",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "init_priviledges_admin",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "addr",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "para",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "access_type",
-				"type": "uint256"
-			}
-		],
-		"name": "modify_priviledges",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "para",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "string",
-				"name": "pid",
-				"type": "string"
-			},
-			{
-				"internalType": "string[]",
-				"name": "newPara",
-				"type": "string[]"
-			}
-		],
-		"name": "write_all_records",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "para",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "pid",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "newPara",
-				"type": "string"
-			}
-		],
-		"name": "write_record",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "accessPriviledges",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "account_type",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "list_priviledges",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256[10]",
-				"name": "",
-				"type": "uint256[10]"
-			},
-			{
-				"internalType": "uint256[10]",
-				"name": "",
-				"type": "uint256[10]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "pid",
-				"type": "string"
-			}
-		],
-		"name": "read_all_records",
-		"outputs": [
-			{
-				"internalType": "string[]",
-				"name": "",
-				"type": "string[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "pid",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "para",
-				"type": "uint256"
-			}
-		],
-		"name": "read_record",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "records",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
-];
+import { ABI, SMART_CONTRACT } from '../shared/constants';
 
 interface PatientRecord {
   healthcare_admit_id: string,
@@ -264,7 +53,7 @@ export class BlockchainInterfaceComponent implements OnInit {
   blockchain_data!: string;
   blockchain_decrypted!: string;
   secrets: string[] = [];
-  smart_contract_addr: string = "0x1f1aAFECeeaEd1aD8F896e024681763828e47332";
+//   smart_contract_addr: string = "0x1f1aAFECeeaEd1aD8F896e024681763828e47332";
   account_addr: string = "0x3738311e29EA5B33092063E5Eb8D43AD83012E07";
   currentPara: number = 0;
   loading: boolean = false;
@@ -342,7 +131,7 @@ export class BlockchainInterfaceComponent implements OnInit {
 	let Web3 = require('web3/dist/web3.min.js');
 	Web3 = new Web3((window as any).ethereum);
 
-	var contract = new Web3.eth.Contract(abi, this.smart_contract_addr);
+	var contract = new Web3.eth.Contract(ABI, SMART_CONTRACT);
 
 	// contract.methods.store(["abc", "def", "ghi", "klm", this.encrypted_data], 0).send({from: this.account_addr}).on('receipt', (result: any) => {
 	//   console.log(result);
@@ -388,7 +177,7 @@ export class BlockchainInterfaceComponent implements OnInit {
 	// para = 1;
 	let Web3 = require('web3/dist/web3.min.js');
 	Web3 = new Web3((window as any).ethereum);
-	var contract = new Web3.eth.Contract(abi, this.smart_contract_addr);
+	var contract = new Web3.eth.Contract(ABI, SMART_CONTRACT);
 	contract.methods.read_all_records("PID1").call({from: this.account_addr}).then((result1: any) => {
 		console.log(result1);
 		this.blockchain_data = result1[para];
